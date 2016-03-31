@@ -30,6 +30,8 @@ String points =(String)request.getAttribute("liferay-map:map:points");
 name = namespace + name;
 %>
 
+
+<h1>Hola GMaps</h1>
 <liferay-util:html-top outputKey="js_maps_google_skip_map_loading">
 	<script>
 		Liferay.namespace('Maps').onGMapsReady = function(event) {
@@ -53,6 +55,8 @@ name = namespace + name;
 <div class="lfr-map" id="<%= name %>Map"></div>
 
 <aui:script use="liferay-map-google-maps">
+
+	debugger;
 	var MapControls = Liferay.MapBase.CONTROLS;
 
 	var mapConfig = {

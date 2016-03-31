@@ -1,0 +1,5 @@
+{
+    "frontend-js-map-open@2.0.1/js/init.es": {
+        "dependencies": ["exports"]
+    }
+}

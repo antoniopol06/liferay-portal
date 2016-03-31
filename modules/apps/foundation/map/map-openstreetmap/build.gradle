@@ -1,3 +1,24 @@
+apply plugin: "com.liferay.cache"
+
+cache {
+	task(classes) {
+		baseDir = "classes/META-INF"
+		exclude "**/*.jsp"
+		cacheDir = ".task-cache"
+
+		skipTaskDependency configJSModules
+		skipTaskDependency transpileJS
+
+		testFile "build.gradle"
+		testFile "package.json"
+		testFile fileTree(dir: "src/main/resources/META-INF/resources", exclude: "**/*.jsp")
+	}
+}
+
+configJSModules {
+	include "**/*.js*"
+}
+
 dependencies {
 	provided group: "com.liferay", name: "com.liferay.map.api", version: "2.0.0"
 	provided group: "com.liferay.portal", name: "com.liferay.portal.impl", version: "2.0.0"

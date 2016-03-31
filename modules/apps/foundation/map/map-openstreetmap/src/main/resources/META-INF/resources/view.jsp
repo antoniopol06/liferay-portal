@@ -29,13 +29,17 @@ String points =(String)request.getAttribute("liferay-map:map:points");
 
 name = namespace + name;
 %>
+<h1>hola OPEN</h1>
 
-<liferay-util:html-top outputKey="js_maps_openstreet_skip_loading">
+<!-- <liferay-util:html-top outputKey="js_maps_openstreet_skip_loading">
 	<link href="<%= protocol %>://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet" />
 	<script src="<%= protocol %>://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
-</liferay-util:html-top>
+</liferay-util:html-top> -->
+<aui:script require="frontend-js-map-open/js/init.es">
+	var prueba = new Liferay.MapOpenStreetMap();
+</aui:script>
 
-<aui:script use="liferay-map-openstreetmap">
+<!-- <aui:script use="liferay-map-openstreetmap">
 	var MapControls = Liferay.MapBase.CONTROLS;
 
 	var mapConfig = {
@@ -85,4 +89,4 @@ name = namespace + name;
 	};
 
 	createMap();
-</aui:script>
+</aui:script> -->

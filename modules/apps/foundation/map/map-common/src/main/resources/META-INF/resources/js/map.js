@@ -606,7 +606,7 @@ AUI.add(
 			},
 			true
 		);
-
+		console.log('LIFERAY MAPBASE');
 		Liferay.MapBase = Base;
 		Liferay.MapGeojsonBase = GeojsonBase;
 		Liferay.MapMarkerBase = MarkerBase;
