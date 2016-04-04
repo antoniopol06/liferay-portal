@@ -54,9 +54,8 @@ name = namespace + name;
 
 <div class="lfr-map" id="<%= name %>Map"></div>
 
-<aui:script use="liferay-map-google-maps">
+<!-- <aui:script use="liferay-map-google-maps">
 
-	debugger;
 	var MapControls = Liferay.MapBase.CONTROLS;
 
 	var mapConfig = {
@@ -112,4 +111,4 @@ name = namespace + name;
 		Liferay.once('gmapsReady', createMap);
 	}
 
-</aui:script>
+</aui:script> -->

@@ -1,9 +1,10 @@
 'use strict';
-console.log('INIT');
-debugger;
+
+import MapBase from 'frontend-js-map-common/js/MapBase.es';
+
 class OpenStreetMap {
 	constructor(){
-		this.MapBase = Liferay.MapBase;
+
 		this.CONTROLS_CONFIG_MAP = {};
 
 		this.CONTROLS_CONFIG_MAP[MapBase.CONTROLS.ATTRIBUTION] = 'attributionControl';
@@ -33,7 +34,7 @@ class OpenStreetMap {
 	}
 
 	initializer(){
-		debugger
+		debugger;
 	}
 }
 

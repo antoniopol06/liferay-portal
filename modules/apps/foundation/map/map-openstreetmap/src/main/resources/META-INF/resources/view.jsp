@@ -35,6 +35,7 @@ name = namespace + name;
 	<link href="<%= protocol %>://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" rel="stylesheet" />
 	<script src="<%= protocol %>://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js" type="text/javascript"></script>
 </liferay-util:html-top> -->
+
 <aui:script require="frontend-js-map-open/js/init.es">
 	var prueba = new Liferay.MapOpenStreetMap();
 </aui:script>
