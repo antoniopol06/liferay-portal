@@ -147,7 +147,7 @@ AUI.add(
 					}
 				},
 
-				EXTENDS: Liferay.AssetTagsSelector,
+				EXTENDS: Liferay.AssetTagsSelectorDeprecated,
 
 				NAME: NAME,
 
@@ -739,6 +739,6 @@ AUI.add(
 	},
 	'',
 	{
-		requires: ['aui-tree', 'liferay-asset-tags-selector']
+		requires: ['aui-tree', 'liferay-asset-tags-selector-deprecated']
 	}
 );
