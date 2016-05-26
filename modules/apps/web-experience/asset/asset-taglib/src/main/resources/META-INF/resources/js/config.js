@@ -18,7 +18,7 @@
 								'liferay-item-selector-dialog',
 								'liferay-service-datasource'
 							]
-						},
+						}
 					},
 					root: MODULE_PATH + '/js/'
 				}
