@@ -34,16 +34,22 @@ import java.io.InputStream;
 
 import java.net.URL;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.JarOutputStream;
 import java.util.jar.Manifest;
 import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;
@@ -224,23 +230,53 @@ public class LPKGBundleTrackerCustomizer
 		return sb.toString();
 	}
 
-	private InputStream _toWARWrapperBundle(Bundle bundle, URL url)
-		throws IOException {
-
+	private String _readServletContextName(URL url) throws IOException {
 		String pathString = url.getPath();
 
-		String contextName = pathString.substring(
+		String servletContextName = pathString.substring(
 			pathString.lastIndexOf('/') + 1, pathString.lastIndexOf(".war"));
 
-		String version = String.valueOf(bundle.getVersion());
-
-		int index = contextName.lastIndexOf('-');
+		int index = servletContextName.lastIndexOf('-');
 
 		if (index >= 0) {
-			version = contextName.substring(index + 1);
-
-			contextName = contextName.substring(0, index);
+			servletContextName = servletContextName.substring(0, index);
 		}
+
+		Path tempFilePath = Files.createTempFile(null, null);
+
+		try (InputStream inputStream1 = url.openStream()) {
+			Files.copy(
+				inputStream1, tempFilePath,
+				StandardCopyOption.REPLACE_EXISTING);
+
+			try (ZipFile zipFile = new ZipFile(tempFilePath.toFile());
+				InputStream inputStream2 = zipFile.getInputStream(
+					new ZipEntry(
+						"WEB-INF/liferay-plugin-package.properties"))) {
+
+				if (inputStream2 != null) {
+					Properties properties = new Properties();
+
+					properties.load(inputStream2);
+
+					String configuredServletContextName =
+						properties.getProperty("servlet-context-name");
+
+					if (configuredServletContextName != null) {
+						servletContextName = configuredServletContextName;
+					}
+				}
+			}
+		}
+		finally {
+			Files.delete(tempFilePath);
+		}
+
+		return servletContextName;
+	}
+
+	private InputStream _toWARWrapperBundle(Bundle bundle, URL url)
+		throws IOException {
 
 		StringBundler sb = new StringBundler(7);
 
@@ -249,7 +285,11 @@ public class LPKGBundleTrackerCustomizer
 		sb.append(StringPool.DASH);
 		sb.append(bundle.getVersion());
 		sb.append(StringPool.SLASH);
-		sb.append(contextName);
+
+		String servletContextName = _readServletContextName(url);
+
+		sb.append(servletContextName);
+
 		sb.append(".war");
 
 		String lpkgURL = sb.toString();
@@ -260,6 +300,19 @@ public class LPKGBundleTrackerCustomizer
 
 		_urls.put(lpkgURL, url);
 
+		String pathString = url.getPath();
+
+		String fileName = pathString.substring(
+			pathString.lastIndexOf('/') + 1, pathString.lastIndexOf(".war"));
+
+		String version = String.valueOf(bundle.getVersion());
+
+		int index = fileName.lastIndexOf('-');
+
+		if (index >= 0) {
+			version = fileName.substring(index + 1);
+		}
+
 		try (UnsyncByteArrayOutputStream unsyncByteArrayOutputStream =
 				new UnsyncByteArrayOutputStream()) {
 
@@ -267,7 +320,8 @@ public class LPKGBundleTrackerCustomizer
 					unsyncByteArrayOutputStream)) {
 
 				_writeManifest(
-					bundle, contextName, version, lpkgURL, jarOutputStream);
+					bundle, servletContextName, version, lpkgURL,
+					jarOutputStream);
 
 				_writeClasses(
 					jarOutputStream, WARBundleWrapperBundleActivator.class,
