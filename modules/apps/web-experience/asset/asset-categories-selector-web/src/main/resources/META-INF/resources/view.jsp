@@ -15,3 +15,44 @@
 --%>
 
 <%@ include file="/init.jsp" %>
+
+<div class="container-fluid-1280">
+	<div class="lfr-categories-selector-list lfr-tags-selector-list" id="<portlet:namespace />listCategories">
+	</div>
+</div>
+
+<portlet:resourceURL id="getCategories" var="resourceURL">
+	<portlet:param name="vocabularyId" value="<%= String.valueOf(assetCategoriesSelectorDisplayContext.getVocabularyId()) %>" />
+</portlet:resourceURL>
+
+<aui:script use="aui-tree-view">
+	var emptyFn = function() {
+		debugger;
+
+	};
+
+	var vocabularyRootNode = {
+		alwaysShowHitArea: true,
+		id: 'vocabulary<%= assetCategoriesSelectorDisplayContext.getVocabularyId() %>',
+		label: '<%= assetCategoriesSelectorDisplayContext.getVocabularyTitle() %>',
+		leaf: false,
+		type: 'io'
+	};
+
+	new A.TreeView(
+		{
+			boundingBox: '#<portlet:namespace />listCategories',
+			children: [vocabularyRootNode],
+			io: {
+				cfg: {
+					data: emptyFn,
+					on: {
+						success: emptyFn
+					}
+				},
+				formatter: emptyFn,
+				url: '<%= resourceURL %>'
+			}
+		}
+	).render();
+</aui:script>
