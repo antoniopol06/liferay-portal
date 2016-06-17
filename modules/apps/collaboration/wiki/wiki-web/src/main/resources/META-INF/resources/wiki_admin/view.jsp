@@ -120,6 +120,18 @@ int nodesCount = WikiNodeServiceUtil.getNodesCount(scopeGroupId);
 	</liferay-frontend:sidebar-panel>
 
 	<div class="sidenav-content">
+
+		<%
+		PortalUtil.addPortletBreadcrumbEntry(request, LanguageUtil.get(request, "wiki"), portletURL.toString());
+		%>
+
+		<liferay-ui:breadcrumb
+			showCurrentGroup="<%= false %>"
+			showGuestGroup="<%= false %>"
+			showLayout="<%= false %>"
+			showParentGroups="<%= false %>"
+		/>
+
 		<liferay-trash:undo
 			portletURL="<%= restoreTrashEntriesURL %>"
 		/>
@@ -173,6 +185,17 @@ int nodesCount = WikiNodeServiceUtil.getNodesCount(scopeGroupId);
 							/>
 
 							<liferay-ui:search-container-column-text colspan="<%= 2 %>">
+
+								<%
+								Date lastPostDate = node.getLastPostDate();
+
+								String lastPostDateDescription = LanguageUtil.getTimeDescription(request, System.currentTimeMillis() - lastPostDate.getTime(), true);
+								%>
+
+								<h5 class="text-default">
+									<liferay-ui:message arguments="<%= new String[] {lastPostDateDescription} %>" key="last-post-x-ago" />
+								</h5>
+
 								<h4>
 									<aui:a href="<%= rowURL.toString() %>">
 										<%= HtmlUtil.escape(node.getName()) %>

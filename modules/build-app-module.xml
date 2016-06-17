@@ -33,7 +33,7 @@
 
 	<condition property="artifact.exclude">
 		<or>
-			<contains string="${basedir}" substring="portal-target-platform-indexer-main" />
+			<available file=".lfrbuild-app-server-lib" />
 			<contains string="${basedir}" substring="required-dependencies" />
 		</or>
 	</condition>
