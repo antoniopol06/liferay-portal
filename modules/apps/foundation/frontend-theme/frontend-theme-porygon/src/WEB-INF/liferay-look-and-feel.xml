@@ -10,7 +10,7 @@
 		<settings>
 			<setting configurable="true" key="show-maximize-minimize-application-links" type="checkbox" value="false" />
 			<setting configurable="true" key="show-header-search" type="checkbox" value="true" />
-			<setting configurable="false" key="show-site-name-default" value="true" />
+			<setting configurable="false" key="show-site-name-default" value="false" />
 			<setting configurable="false" key="show-site-name-supported" value="true" />
 		</settings>
 		<portlet-decorator id="barebone" name="Barebone">
