@@ -60,7 +60,8 @@
 						function(event) {
 							setTimeout(function() {
 								var isActiveElementBlur = document.activeElement !== instance.searchIcon && document.activeElement !== this.searchInput;
-								if (isActiveElementBlur && !instance.searchInput.value || instance.searchInput.value === '') {
+
+								if (isActiveElementBlur && (!instance.searchInput.value || instance.searchInput.value === '')) {
 									instance.hideInputSearch();
 									dom.addClasses(instance.searchInput, 'hidden');
 								}
