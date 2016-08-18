@@ -15,6 +15,10 @@ header {
 
 	a {
 		color: $main-header-color;
+
+		&:hover, &:focus {
+			color: $secondary-header-color;
+		}
 	}
 
 	.form-control:focus {
