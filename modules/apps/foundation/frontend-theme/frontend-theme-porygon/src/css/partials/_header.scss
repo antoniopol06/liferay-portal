@@ -23,16 +23,18 @@ header {
 	}
 
 	.navbar-user {
-		.user-avatar-link > a {
-			color: $main-header-color;
-			display: inline-block;
-			font-size: 12px;
-			padding: 16px 16px 16px 6px;
-			text-transform: uppercase;
+		.user-avatar-link, .sign-in {
+			& > a {
+				color: $main-header-color;
+				display: inline-block;
+				font-size: 12px;
+				padding: 16px 16px 16px 6px;
+				text-transform: uppercase;
 
-			&:hover, &:focus, &.active, &.open {
-				color: $secondary-header-color;
-				text-decoration: none;
+				&:hover, &:focus, &.active, &.open {
+					color: $secondary-header-color;
+					text-decoration: none;
+				}
 			}
 		}
 
