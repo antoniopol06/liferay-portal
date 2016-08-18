@@ -36,14 +36,6 @@
 	</#if>
 
 	<div class="nav navbar-right navbar-user">
-		<#if !is_signed_in>
-			<span class="icon-login icon-monospaced">
-				<svg class="lexicon-icon">
-					<use xlink:href="${images_folder}/lexicon/icons.svg#users" />
-				</svg>
-			</span>
-		</#if>
-
 		<@liferay.user_personal_bar />
 	</div>
 </div>
