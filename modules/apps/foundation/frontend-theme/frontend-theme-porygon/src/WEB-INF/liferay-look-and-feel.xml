@@ -28,9 +28,9 @@
 		</portlet-decorator>
 		<layout-templates>
 			<custom>
-				<layout-template id="porygon_1_2_1_width_limited" name="Porygon 1 2 1 columns width limited">
-					<template-path>/layoutttpl/custom/porygon_1_2_1_width_limited.tpl</template-path>
-					<thumbnail-path>/layoutttpl/custom/porygon_1_2_1_width_limited.png</thumbnail-path>
+				<layout-template id="porygon_70_30_width_limited" name="Porygon 2 Columns (70/30) width limited">
+					<template-path>/layoutttpl/custom/porygon_70_30_width_limited.tpl</template-path>
+					<thumbnail-path>/layoutttpl/custom/porygon_70_30_width_limited.png</thumbnail-path>
 				</layout-template>
 			</custom>
 		</layout-templates>
