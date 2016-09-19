@@ -241,6 +241,10 @@ AUI.add(
 
 							instance.focus();
 						}
+
+						instance.getNativeEditor().resetUndo();
+
+						instance.getNativeEditor().resetDirty();
 					},
 
 					_onBlur: function(event) {
