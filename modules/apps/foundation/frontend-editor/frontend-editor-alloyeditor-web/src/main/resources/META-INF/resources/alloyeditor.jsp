@@ -382,6 +382,15 @@ if (showSource) {
 		}
 	);
 
+	if (Liferay.SPA && Liferay.SPA.app) {
+		var currentLinkSelector = Liferay.SPA.app.getLinkSelector();
+
+		if (currentLinkSelector.indexOf(':not([data-cke-saved-href])') === -1) {
+			currentLinkSelector += ':not([data-cke-saved-href])';
+			Liferay.SPA.app.setLinkSelector(currentLinkSelector);
+		}
+	}
+
 	<c:if test="<%= autoCreate %>">
 		window['<%= name %>'].initEditor();
 	</c:if>
