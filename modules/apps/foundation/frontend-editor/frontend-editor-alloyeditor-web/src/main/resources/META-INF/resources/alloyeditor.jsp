@@ -263,15 +263,55 @@ if (showSource) {
 			plugins.push(A.Plugin.LiferayAlloyEditorSource);
 		</c:if>
 
+		var onChangeMethodCallback;
+
+		var onBlurMethodCallback;
+
+		var onFocusMethodCallback;
+
+		var onInitMethodCallback;
+
+		<c:if test="<%= Validator.isNotNull(onBlurMethod) %>">
+			onBlurMethodCallback = function() {
+				if (window['<%= HtmlUtil.escapeJS(onBlurMethod) %>']) {
+					window['<%= HtmlUtil.escapeJS(onBlurMethod) %>']();
+				}
+			};
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(onChangeMethod) %>">
+			onChangeMethodCallback = function() {
+				if (window['<%= HtmlUtil.escapeJS(onChangeMethod) %>']) {
+					window['<%= HtmlUtil.escapeJS(onChangeMethod) %>']();
+				}
+			};
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(onFocusMethod) %>">
+			onFocusMethodCallback = function() {
+				if (window['<%= HtmlUtil.escapeJS(onFocusMethod) %>']) {
+					window['<%= HtmlUtil.escapeJS(onFocusMethod) %>']();
+				}
+			};
+		</c:if>
+
+		<c:if test="<%= Validator.isNotNull(onInitMethod) %>">
+			onInitMethodCallback = function() {
+				if (window['<%= HtmlUtil.escapeJS(onInitMethod) %>']) {
+					window['<%= HtmlUtil.escapeJS(onInitMethod) %>']();
+				}
+			};
+		</c:if>
+
 		alloyEditor = new A.LiferayAlloyEditor(
 			{
 				contents: '<%= HtmlUtil.escapeJS(contents) %>',
 				editorConfig: editorConfig,
 				namespace: '<%= name %>',
-				onBlurMethod: window['<%= HtmlUtil.escapeJS(onBlurMethod) %>'],
-				onChangeMethod: window['<%= HtmlUtil.escapeJS(onChangeMethod) %>'],
-				onFocusMethod: window['<%= HtmlUtil.escapeJS(onFocusMethod) %>'],
-				onInitMethod: window['<%= HtmlUtil.escapeJS(onInitMethod) %>'],
+				onBlurMethod: onBlurMethodCallback,
+				onChangeMethod: onChangeMethodCallback,
+				onFocusMethod: onFocusMethodCallback,
+				onInitMethod: onInitMethodCallback,
 				plugins: plugins,
 				textMode: <%= (editorOptions != null) ? editorOptions.isTextMode() : Boolean.FALSE.toString() %>,
 
