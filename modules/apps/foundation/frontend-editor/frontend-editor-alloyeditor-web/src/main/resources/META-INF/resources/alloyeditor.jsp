@@ -144,8 +144,12 @@ if (editorOptions != null) {
 					<aui:icon cssClass="icon-monospaced" image="moon" markupView="lexicon" />
 				</button>
 
-				<button class="btn btn-default btn-xs editor-view lfr-portal-tooltip" data-title="<%= LanguageUtil.get(resourceBundle, "code-view") %>" id="<%= HtmlUtil.escapeAttribute(name) %>Switch" type="button">
+				<button class="btn btn-default btn-xs editor-view lfr-portal-tooltip" data-title="<%= LanguageUtil.get(resourceBundle, "code-view") %>" id="<%= HtmlUtil.escapeAttribute(name) %>CodeView" type="button">
 					<aui:icon cssClass="icon-monospaced" image="code" markupView="lexicon" />
+				</button>
+
+				<button class="btn btn-default btn-xs editor-view hide lfr-portal-tooltip" data-title="<%= LanguageUtil.get(resourceBundle, "text-view") %>" id="<%= HtmlUtil.escapeAttribute(name) %>TextView" type="button">
+					<aui:icon cssClass="icon-monospaced" image="text-editor" markupView="lexicon" />
 				</button>
 			</div>
 		</c:when>
