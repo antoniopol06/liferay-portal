@@ -114,7 +114,7 @@ AUI.add(
 
 						instance._sourceEditor = sourceEditor;
 
-						instance._sourceEditor.editor.focus();
+						instance._sourceEditor.getEditor().focus();
 					},
 
 					_getEditorStateLexiconIcon: function() {
@@ -276,7 +276,7 @@ AUI.add(
 
 							instance._toggleEditorModeUI();
 
-							instance._sourceEditor.editor.focus();
+							instance._sourceEditor.getEditor().focus();
 						}
 						else {
 							instance._createSourceEditor();
@@ -290,7 +290,7 @@ AUI.add(
 
 						instance._sourceEditor.switchTheme();
 
-						instance._sourceEditor.editor.focus();
+						instance._sourceEditor.getEditor().focus();
 					},
 
 					_toggleEditorModeUI: function() {
