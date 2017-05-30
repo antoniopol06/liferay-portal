@@ -14,6 +14,7 @@
 
 package com.liferay.portal.kernel.upgrade;
 
+import com.liferay.portal.kernel.dao.db.DBInspector;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LoggingTimer;
@@ -44,10 +45,12 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 			}
 		}
 
+		DBInspector dbInspector = new DBInspector(connection);
+
 		tableName = normalizeName(tableName, databaseMetaData);
 
 		try (ResultSet tableResultSet = databaseMetaData.getTables(
-				connection.getCatalog(), connection.getSchema(), tableName,
+				dbInspector.getCatalog(), dbInspector.getSchema(), tableName,
 				null)) {
 
 			if (!tableResultSet.next()) {
@@ -57,7 +60,8 @@ public class UpgradeMVCCVersion extends UpgradeProcess {
 			}
 
 			try (ResultSet columnResultSet = databaseMetaData.getColumns(
-					connection.getCatalog(), connection.getSchema(), tableName,
+					dbInspector.getCatalog(), dbInspector.getSchema(),
+					tableName,
 					normalizeName("mvccVersion", databaseMetaData))) {
 
 				if (columnResultSet.next()) {

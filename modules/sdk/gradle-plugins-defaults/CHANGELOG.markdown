@@ -274,7 +274,7 @@ by default.
 ### Added
 - [LPS-66906]: Override the [`sass-binary-path`](https://github.com/sass/node-sass#binary-configuration-parameters)
 argument in the `npmInstall` task with the value of the project property
-`nodejs.npm.ci.sass.binary.site` when using Jenkins.
+`nodejs.npm.ci.sass.binary.site` when on Jenkins.
 
 ### Changed
 - [LPS-66906]: Update the [Liferay Gradle Plugins] dependency to version 2.0.40.
@@ -1398,6 +1398,47 @@ version in external files to the latest snapshot.
 ### Changed
 - [LPS-72030]: Update the [Liferay Gradle Plugins] dependency to version 3.3.2.
 
+## 3.6.5 - 2017-04-21
+
+### Added
+- [LPS-72045]: When on Jenkins, fail the `testIntegration` task if any dependent
+projects defined in the `testIntegrationCompile` configuration do not have the
+`.lfrbuild-portal` marker file.
+
+### Changed
+- [LPS-72067]: Avoid including `compileInclude` dependencies in the classpath of
+[Find Security Bugs].
+- [LPS-72067]: Avoid running the `findSecurityBugs` task if the classpath does
+not contain a class or JAR file.
+- [LPS-72067]: Update the [Find Security Bugs] dependency to version
+1.6.0.LIFERAY-PATCHED-1.
+- [LPS-72102]: Update the [Liferay Gradle Plugins] dependency to version 3.3.3.
+
+## 3.6.6 - 2017-04-21
+
+### Changed
+- [LPS-71722]: Update the [Liferay Gradle Plugins] dependency to version 3.3.4.
+
+## 3.6.7 - 2017-04-25
+
+### Changed
+- [LPS-70819]: Use Gradle dependency management in the `downloadCompiledJSP`
+task if the URL is protected.
+- [LPS-72152]: Update the [Liferay Gradle Plugins] dependency to version 3.3.5.
+
+## 3.6.8 - 2017-04-27
+
+### Added
+- [LPS-68813]: Execute `findSecurityBugs` with the `check` task.
+- [LPS-68813]: Make `findSecurityBugs` task visible in `gradle task`.
+
+### Changed
+- [LPS-67039]: Embed and use [Liferay's PMD rule set file](https://github.com/liferay/liferay-plugins/blob/master/dependencies/net.sourceforge.pmd/rulesets/java/standard-rules.xml).
+- [LPS-71728]: Update the [Liferay Gradle Plugins] dependency to version 3.3.6.
+- [LPS-71728]: Update the [Liferay Gradle Plugins Baseline] dependency to
+version 1.1.5.
+
+[Find Security Bugs]: https://github.com/liferay/liferay-portal/tree/master/modules/third-party/com-h3xstream-findsecbugs
 [Liferay CDN]: https://cdn.lfrs.sl/repository.liferay.com/nexus/content/groups/public
 [Liferay Gradle Plugins]: https://github.com/liferay/liferay-portal/tree/master/modules/sdk/gradle-plugins
 [Liferay Gradle Plugins App Javadoc Builder]: https://github.com/liferay/liferay-portal/tree/master/modules/sdk/gradle-plugins-app-javadoc-builder
@@ -1536,11 +1577,16 @@ version in external files to the latest snapshot.
 [LPS-71603]: https://issues.liferay.com/browse/LPS-71603
 [LPS-71686]: https://issues.liferay.com/browse/LPS-71686
 [LPS-71722]: https://issues.liferay.com/browse/LPS-71722
+[LPS-71728]: https://issues.liferay.com/browse/LPS-71728
 [LPS-71795]: https://issues.liferay.com/browse/LPS-71795
 [LPS-71826]: https://issues.liferay.com/browse/LPS-71826
 [LPS-71901]: https://issues.liferay.com/browse/LPS-71901
 [LPS-72030]: https://issues.liferay.com/browse/LPS-72030
 [LPS-72039]: https://issues.liferay.com/browse/LPS-72039
+[LPS-72045]: https://issues.liferay.com/browse/LPS-72045
+[LPS-72067]: https://issues.liferay.com/browse/LPS-72067
+[LPS-72102]: https://issues.liferay.com/browse/LPS-72102
+[LPS-72152]: https://issues.liferay.com/browse/LPS-72152
 [LRDOCS-2594]: https://issues.liferay.com/browse/LRDOCS-2594
 [LRDOCS-2841]: https://issues.liferay.com/browse/LRDOCS-2841
 [LRDOCS-2981]: https://issues.liferay.com/browse/LRDOCS-2981

@@ -702,15 +702,11 @@ public class GitWorkingDirectory {
 	public RemoteConfig getRemoteConfig(String remoteName)
 		throws GitAPIException {
 
-		List<RemoteConfig> remoteConfigs = getRemoteConfigs();
-
-		for (RemoteConfig remoteConfig : remoteConfigs) {
-			if (remoteName.equals(remoteConfig.getName())) {
-				return remoteConfig;
-			}
+		if (remoteName.equals("upstream")) {
+			return _getUpstreamRemoteConfig();
 		}
 
-		return null;
+		return _getRemoteConfig(remoteName);
 	}
 
 	public List<RemoteConfig> getRemoteConfigs() throws GitAPIException {
@@ -1066,7 +1062,7 @@ public class GitWorkingDirectory {
 	}
 
 	protected String loadRepositoryName() throws GitAPIException {
-		String remoteURL = getRemoteURL(getRemoteConfig("upstream"));
+		String remoteURL = getRemoteURL(_getRemoteConfig("upstream"));
 
 		int x = remoteURL.lastIndexOf("/") + 1;
 		int y = remoteURL.indexOf(".git");
@@ -1095,7 +1091,7 @@ public class GitWorkingDirectory {
 	}
 
 	protected String loadRepositoryUsername() throws GitAPIException {
-		String remoteURL = getRemoteURL(getRemoteConfig("upstream"));
+		String remoteURL = getRemoteURL(_getRemoteConfig("upstream"));
 
 		int x = remoteURL.indexOf(":") + 1;
 		int y = remoteURL.indexOf("/");
@@ -1149,6 +1145,50 @@ public class GitWorkingDirectory {
 				file.delete();
 			}
 		}
+	}
+
+	private RemoteConfig _getRemoteConfig(String remoteName)
+		throws GitAPIException {
+
+		List<RemoteConfig> remoteConfigs = getRemoteConfigs();
+
+		for (RemoteConfig remoteConfig : remoteConfigs) {
+			if (remoteName.equals(remoteConfig.getName())) {
+				return remoteConfig;
+			}
+		}
+
+		return null;
+	}
+
+	private RemoteConfig _getUpstreamPublicRemoteConfig()
+		throws GitAPIException {
+
+		RemoteConfig upstreamPublicRemoteConfig = _getRemoteConfig(
+			"upstream-public");
+
+		if (upstreamPublicRemoteConfig != null) {
+			return upstreamPublicRemoteConfig;
+		}
+
+		String upstreamRemoteURL = getRemoteURL(_getRemoteConfig("upstream"));
+
+		upstreamRemoteURL = upstreamRemoteURL.replace("-ee", "");
+		upstreamRemoteURL = upstreamRemoteURL.replace("-private", "");
+
+		return addRemote(true, "upstream-public", upstreamRemoteURL);
+	}
+
+	private RemoteConfig _getUpstreamRemoteConfig() throws GitAPIException {
+		RemoteConfig upstreamRemoteConfig = _getRemoteConfig("upstream");
+
+		String upstreamRemoteURL = getRemoteURL(upstreamRemoteConfig);
+
+		if (upstreamRemoteURL.contains(_repositoryName + ".git")) {
+			return upstreamRemoteConfig;
+		}
+
+		return _getUpstreamPublicRemoteConfig();
 	}
 
 	private static final List<RepositoryState> _rebaseRepositoryStates =
