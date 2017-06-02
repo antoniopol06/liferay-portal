@@ -15,19 +15,19 @@
 package com.liferay.asset.publisher.web.display.context;
 
 import com.liferay.asset.kernel.AssetRendererFactoryRegistryUtil;
+import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetEntry;
 import com.liferay.asset.kernel.model.AssetRenderer;
-import com.liferay.asset.kernel.model.AssetTag;
-import com.liferay.asset.kernel.model.AssetCategory;
 import com.liferay.asset.kernel.model.AssetRendererFactory;
+import com.liferay.asset.kernel.model.AssetTag;
 import com.liferay.asset.kernel.model.AssetVocabulary;
 import com.liferay.asset.kernel.model.ClassType;
 import com.liferay.asset.kernel.model.ClassTypeField;
 import com.liferay.asset.kernel.model.ClassTypeReader;
 import com.liferay.asset.kernel.service.AssetEntryLocalServiceUtil;
 import com.liferay.asset.kernel.service.AssetEntryServiceUtil;
-import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
 import com.liferay.asset.kernel.service.AssetVocabularyServiceUtil;
+import com.liferay.asset.kernel.service.persistence.AssetEntryQuery;
 import com.liferay.asset.publisher.web.constants.AssetPublisherPortletKeys;
 import com.liferay.asset.publisher.web.constants.AssetPublisherWebKeys;
 import com.liferay.asset.publisher.web.internal.configuration.AssetPublisherWebConfiguration;
@@ -38,11 +38,11 @@ import com.liferay.portal.kernel.dao.search.SearchContainer;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.Layout;
 import com.liferay.portal.kernel.model.PortletConstants;
-import com.liferay.portal.kernel.portlet.PortletProvider;
-import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletProvider;
+import com.liferay.portal.kernel.portlet.PortletProviderUtil;
 import com.liferay.portal.kernel.portlet.PortletURLUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.service.permission.PortletPermissionUtil;
@@ -550,7 +550,9 @@ public class AssetPublisherDisplayContext {
 				return null;
 			}
 
-			portletURL.setParameter("eventName", _portletResponse.getNamespace() + "selectCategory");
+			portletURL.setParameter(
+				"eventName",
+				_portletResponse.getNamespace() + "selectCategory");
 			portletURL.setParameter(
 				"selectedCategories", "{selectedCategories}");
 			portletURL.setParameter("singleSelect", "{singleSelect}");
@@ -576,7 +578,8 @@ public class AssetPublisherDisplayContext {
 				return null;
 			}
 
-			portletURL.setParameter("eventName", _portletResponse.getNamespace() + "selectTag");
+			portletURL.setParameter(
+				"eventName", _portletResponse.getNamespace() + "selectTag");
 			portletURL.setParameter("selectedTags", "{selectedTags}");
 
 			portletURL.setWindowState(LiferayWindowState.POP_UP);
@@ -793,7 +796,7 @@ public class AssetPublisherDisplayContext {
 				themeDisplay.getScopeGroupId());
 
 		return ListUtil.toString(
-				vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR);
+			vocabularies, AssetVocabulary.VOCABULARY_ID_ACCESSOR);
 	}
 
 	public AssetEntry incrementViewCounter(AssetEntry assetEntry)
